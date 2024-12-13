@@ -57,33 +57,48 @@ SVAN takes as input 6 mandatory arguments:
    7. REFERENCE: Fasta file for the reference human sequence
    8. SAMPLEID: Sample identified for naming the output VCF file
 
-# Input files
+### Input files
 * Bed files for VNTR, EXONS and REPEAT annotations can be downloaded from Zenodo for hg38 (link) and chm13 (link).
 * Fasta containing consensus sequences for retroelements can be downloaded from Zenodo.
 * TRF output can be generated as described bellow.
 
-# Generation of TRF annotations for INS
-1. Produce fasta with inserted sequences
+#### Generation of TRF annotations for INS
+1. Produce fasta with inserted sequences:
+
+```
 python scripts/ins2fasta.py ins.vcf outDir
+```
 
 2. Execute TRF
+
+```
 trf insertions_seq.fa 2 7 7 80 10 10 500 -h -d -ngs 1> ins_trf.out
+```
 
-# Generation of TRF annotations for DEL
+### Generation of TRF annotations for DEL
 1. Produce fasta with deleted sequences
+
+```
 python scripts/del2fasta.py del.vcf outDir
-
+```
 2. Execute TRF
-trf deletions_seq.fa 2 7 7 80 10 10 500 -h -d -ngs 1> del_trf.out
 
-### Produce fasta with inserted sequences
+```
+trf deletions_seq.fa 2 7 7 80 10 10 500 -h -d -ngs 1> del_trf.out
+```
 
 ## Execution
 # Execution for INS (chm13):
+
+```
 python SVAN-INS.py ins.vcf ins_trf.out VNTR_chm13.bed EXONS_chm13.bed REPEATS_chm13.bed CONSENSUS.fa chm13.fa SAMPLEID
+```
 
 # Execution for DEL (chm13):
+
+```
 python SVAN-DEL.py del.vcf del_trf.out VNTR_chm13.bed EXONS_chm13.bed REPEATS_chm13.bed CONSENSUS.fa chm13.fa SAMPLEID 
+```
 
 ## Output
 SVAN produces as output a standard VCF file with SV annotations incorporated into the INFO field per each variant
