@@ -75,7 +75,7 @@ python scripts/ins2fasta.py ins.vcf outDir
 trf insertions_seq.fa 2 7 7 80 10 10 500 -h -d -ngs 1> ins_trf.out
 ```
 
-### Generation of TRF annotations for DEL
+#### Generation of TRF annotations for DEL
 1. Produce fasta with deleted sequences
 
 ```
@@ -88,13 +88,13 @@ trf deletions_seq.fa 2 7 7 80 10 10 500 -h -d -ngs 1> del_trf.out
 ```
 
 ## Execution
-# Execution for INS (chm13):
+### Execution for INS (chm13):
 
 ```
 python SVAN-INS.py ins.vcf ins_trf.out VNTR_chm13.bed EXONS_chm13.bed REPEATS_chm13.bed CONSENSUS.fa chm13.fa SAMPLEID
 ```
 
-# Execution for DEL (chm13):
+### Execution for DEL (chm13):
 
 ```
 python SVAN-DEL.py del.vcf del_trf.out VNTR_chm13.bed EXONS_chm13.bed REPEATS_chm13.bed CONSENSUS.fa chm13.fa SAMPLEID 
