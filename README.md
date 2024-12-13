@@ -49,7 +49,7 @@ SVAN does not require any further installation step. It is written in Python and
 SVAN takes as input 6 mandatory arguments:
 
    1. VCF: Input VCF file containing sequence-resolved insertion or deletion SV calls. 
-   2. TRF: Output for Tandem Repeat Finder execution on the inserted or deleted sequence for each SV in the input VCF 
+   2. TRF: Output for Tandem Repeat Finder (TRF) execution on the inserted or deleted sequence for each SV in the input VCF 
    3. VNTR: Bed file containing VNTR annotation on the reference
    4. EXONS: Bed file containing EXON annotation on the reference
    5. REPEATS: Bed file containing REPEATS annotated with RepeatMasker on the reference
@@ -57,10 +57,32 @@ SVAN takes as input 6 mandatory arguments:
    7. REFERENCE: Fasta file for the reference human sequence
    8. SAMPLEID: Sample identified for naming the output VCF file
 
-## Execution for INS (chm13):
+# Input files
+* Bed files for VNTR, EXONS and REPEAT annotations can be downloaded from Zenodo for hg38 (link) and chm13 (link).
+* Fasta containing consensus sequences for retroelements can be downloaded from Zenodo.
+* TRF output can be generated as described bellow.
+
+# Generation of TRF annotations for INS
+1. Produce fasta with inserted sequences
+python scripts/ins2fasta.py ins.vcf outDir
+
+2. Execute TRF
+trf insertions_seq.fa 2 7 7 80 10 10 500 -h -d -ngs 1> ins_trf.out
+
+# Generation of TRF annotations for DEL
+1. Produce fasta with deleted sequences
+python scripts/del2fasta.py del.vcf outDir
+
+2. Execute TRF
+trf deletions_seq.fa 2 7 7 80 10 10 500 -h -d -ngs 1> del_trf.out
+
+### Produce fasta with inserted sequences
+
+## Execution
+# Execution for INS (chm13):
 python SVAN-INS.py ins.vcf ins_trf.out VNTR_chm13.bed EXONS_chm13.bed REPEATS_chm13.bed CONSENSUS.fa chm13.fa SAMPLEID
 
-## Execution for DEL (chm13):
+# Execution for DEL (chm13):
 python SVAN-DEL.py del.vcf del_trf.out VNTR_chm13.bed EXONS_chm13.bed REPEATS_chm13.bed CONSENSUS.fa chm13.fa SAMPLEID 
 
 ## Output
