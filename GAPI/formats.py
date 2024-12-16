@@ -1176,11 +1176,11 @@ class VCF_header():
         ## 5. Column data names
         # a) Regular VCF
         if not self.sampleIds:
-            colnames = '\t'.join(['#CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'INFO', "\n"])
+            colnames = '\t'.join(['#CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'INFO']) + "\n"
 
         # b) Multi-sample VCF
         else:
-            colnames = '\t'.join(['#CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'INFO', 'FORMAT'] + self.sampleIds + ["\n"])
+            colnames = '\t'.join(['#CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'INFO', 'FORMAT'] + self.sampleIds) + "\n"
 
 
         ## 6. Join all the info
