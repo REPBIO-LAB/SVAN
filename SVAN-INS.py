@@ -2761,7 +2761,7 @@ def alignment_minimap2(INPUT, reference, preset, fileName, processes, outDir):
     '''
     '''
     PAF = outDir + '/' + fileName + '.paf'
-    err = open(outDir + '/' + fileName + '.err', 'w') 
+    err = open(outDir + '/' + fileName + '.err', 'w')
     command = 'minimap2 -t ' + str(processes) + ' -x ' + preset + ' ' + reference + ' ' + INPUT + ' > ' + PAF
     status = subprocess.call(command, stderr=err, shell=True)
 
@@ -3296,7 +3296,7 @@ info2add = {'ITYPE_N': ['.', 'String', 'Type of insertion: solo, partnered, orph
             ## Conformation and structure related fields
             'CONFORMATION': ['.', 'String', 'Insertion conformation'], \
             'CONFORMATION_EXT': ['.', 'String', 'Detailed insertion conformation, including the length for each component'], \
-            'NOT_CANONICAL': ['.', 'Flag', 'Not canonical MEI'], \
+            'NOT_CANONICAL': ['0', 'Flag', 'Not canonical MEI'], \
 
             ##INFO=<ID=H2,Number=0,Type=Flag,Description="HapMap2 membership">
 

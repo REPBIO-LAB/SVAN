@@ -2008,7 +2008,7 @@ class SUPPLEMENTARY_cluster(cluster):
                 structure = retrotransposons.retrotransposon_structure(insertPath, index, outDir)
 
                 # a) Resolved structure
-                if ('INS_TYPE' in structure) and (structure['INS_TYPE'] is not 'unknown') and ('PERC_RESOLVED' in structure) and (structure['PERC_RESOLVED'] >= 60):
+                if ('INS_TYPE' in structure) and (structure['INS_TYPE'] != 'unknown') and ('PERC_RESOLVED' in structure) and (structure['PERC_RESOLVED'] >= 60):
                     bridge = True
                     supportType = 'unaligned'
                     bridgeType = structure['INS_TYPE']  
@@ -2034,7 +2034,7 @@ class SUPPLEMENTARY_cluster(cluster):
 
                 # a) Resolved structure
                 # TEMP
-                if ('INS_TYPE' in structure) and (structure['INS_TYPE'] is not 'unknown') and ('PERC_RESOLVED' in structure) and (structure['PERC_RESOLVED'] >= 0):
+                if ('INS_TYPE' in structure) and (structure['INS_TYPE'] != 'unknown') and ('PERC_RESOLVED' in structure) and (structure['PERC_RESOLVED'] >= 0):
                 #if ('INS_TYPE' in structure) and (structure['INS_TYPE'] is not 'unknown') and ('PERC_RESOLVED' in structure) and (structure['PERC_RESOLVED'] >= 60):
                     bridge = True
                     supportType = 'unaligned'
@@ -4347,7 +4347,7 @@ class BND_junction():
 
 
                 # a) Resolved structure
-                if ('INS_TYPE' in structure) and (structure['INS_TYPE'] is not 'unknown') and ('PERC_RESOLVED' in structure) and (structure['PERC_RESOLVED'] >= 60):
+                if ('INS_TYPE' in structure) and (structure['INS_TYPE'] != 'unknown') and ('PERC_RESOLVED' in structure) and (structure['PERC_RESOLVED'] >= 60):
                     self.bridge.bridgeType = structure['INS_TYPE'] 
                     # TODO: put consensus sequence
                     #self.bridge.bridgeInfo['bridgeSeq'] = bridgeSeq
@@ -4362,7 +4362,7 @@ class BND_junction():
                 # NOTE (EVA): This function was run before (in supports_unaligned_bridge) and I think it's quite redundant
                 structure = virus.virus_structure(polishedFastaBridgePath, viralDb, outDir)
 
-                if ('INS_TYPE' in structure) and (structure['INS_TYPE'] is not 'unknown') and ('PERC_RESOLVED' in structure) and (structure['PERC_RESOLVED'] >= 60):
+                if ('INS_TYPE' in structure) and (structure['INS_TYPE'] != 'unknown') and ('PERC_RESOLVED' in structure) and (structure['PERC_RESOLVED'] >= 60):
                     # b) Unresolved structure
                     ## TODO: VIRUSES STRUCTURE!!!
                     self.bridge.bridgeType = structure['INS_TYPE'] 
