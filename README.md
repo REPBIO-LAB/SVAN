@@ -58,7 +58,7 @@ SVAN takes as input 6 mandatory arguments:
    8. SAMPLEID: Sample identified for naming the output VCF file
 
 ### Input files
-* Bed files for VNTR, EXONS and REPEAT annotations can be downloaded from Zenodo for hg38 (https://zenodo.org/records/14499669/files/hg38.tar.gz) and chm13 (https://zenodo.org/records/14499669/files/chm13.tar.gz).
+* Bed files for VNTR, EXONS and REPEAT annotations can be downloaded from Zenodo for hg38 (https://zenodo.org/records/15229020/files/hg38.tar.gz) and chm13 (https://zenodo.org/records/15229020/files/chm13.tar.gz).
 * Fasta containing consensus sequences for retroelements can be downloaded from Zenodo.
 * TRF output can be generated as described bellow.
 
