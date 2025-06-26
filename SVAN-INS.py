@@ -2557,7 +2557,7 @@ def nested_annot(retro_annot, reference, minMAPQ, minHitLen, fileName, outDir):
     
     ## Discard if no hit passes the filters
     if not PAF_cons.alignments:
-        return
+        return retro_annot
     
     ## Group alignments by insertion id
     consHitsTd = group_alignments(PAF_cons)
