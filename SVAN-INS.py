@@ -122,9 +122,9 @@ def annot_tandem_dup(VCF, PAFs_ref):
 
         ## Define insertion interval
         offset = 1000
-        iChr, pos = insId.split('_')[1].split(':')
-        iBeg = int(pos) - offset
-        iEnd = int(pos) + offset
+        iChr = variant.chrom
+        iBeg = variant.pos - offset
+        iEnd = variant.pos + offset
 
         ## Filter out hits outside insertion interval
         filteredHits = []
@@ -427,7 +427,8 @@ def annot_interspersed_dup(VCF, PAFs_ref):
         if chain.perc_query_covered() >= 75:
 
             ## Add duplication annotation to the variant info
-            tmp = {'ITYPE_N': 'DUP_INTERSPERSED'}
+            coords = ','.join([hit.tName + ':' + str(hit.tBeg) + '-' + str(hit.tEnd) + '_' + hit.strand for hit in chain.alignments])
+            tmp = {'ITYPE_N': 'DUP_INTERSPERSED', 'DUP_COORD': coords}
             variant.info.update(tmp)
 
             ## Add duplication call to the VCF
@@ -1569,7 +1570,7 @@ def filter_partnered_ipos(retro_annot):
             continue
 
         ## Collect coordinates for insertion interval 
-        tmp = insId.split('_')[1]
+        tmp = insId.rsplit('_', 1)[1]
         iChr, iPos = tmp.split(':')
         iBeg = int(iPos) - 1000
         iEnd = int(iPos) + 1000
@@ -1618,7 +1619,7 @@ def reclassify_5prime_partnered_ipos(retro_annot):
             continue
 
         ## Collect coordinates for insertion interval 
-        tmp = insId.split('_')[1]
+        tmp = insId.rsplit('_', 1)[1]
         iChr, iPos = tmp.split(':')
         iBeg = int(iPos) - 1000
         iEnd = int(iPos) + 1000
@@ -2289,7 +2290,7 @@ def templated_ins(retro_annot, chain):
     offset = 50000
     firstHit = chain.alignments[0]
     insIdRef, coord = firstHit.qName.split(':')
-    iRef = insIdRef.split('_')[1]
+    iRef = insIdRef.rsplit('_', 1)[1]
     iBeg = int(coord) - offset
     iEnd = int(coord) + offset
     
@@ -3144,7 +3145,7 @@ maxLen = 50000
 filtered_VCF = filter_VCF_len(VCF, maxLen)
 print('VCF: ', len(VCF.variants), len(filtered_VCF.variants))
 
-## 1. Load input files 
+## 1. Load input files 
 #######################
 print('1. Load input files')
 
@@ -3166,7 +3167,7 @@ print('1.d Annotated repeats')
 print('2. Annotate repetitive sequences at the insertion breakpoints')
 #annotate_repeats_bkp(filtered_VCF, repeatsBinDb)
 
-## 3. Align inserts to reference
+## 3. Align inserts to reference
 #################################
 print('3. Align inserts to reference')
 PAFs_ref = align_ins2ref(filtered_VCF, reference, tmpDir)
