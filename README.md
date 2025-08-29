@@ -104,8 +104,7 @@ python SVAN-DEL.py del.vcf del_trf.out VNTR_chm13.bed EXONS_chm13.bed REPEATS_ch
 SVAN produces as output a standard VCF file with SV annotations incorporated into the INFO field per each variant
 
 ## Developers
-SVAN has been initially developed by Bernardo Rodríguez Martín at the Korbel Group at the European Molecular Biology Laboratory (EMBL) (2022-2023).
-Currently, SVAN is mantained and further developed by Emiliano Sotelo Fonseca and Bernardo Rodríguez Martín at the Repetitive DNA Biology (REPBIO) Lab from the Centre for Genomic Regulation (CRG) (2024-).
+SVAN was initially developed by Bernardo Rodríguez Martín in the Korbel Group (https://www.embl.org/groups/korbel/) at the European Molecular Biology Laboratory (EMBL) (2022–2023). Since 2024, it has been maintained and further developed by Emiliano Sotelo Fonseca and Bernardo Rodríguez Martín in the Repetitive DNA Biology Lab (https://www.crg.eu/en/content/research/independent-fellow/bernardo-rodriguez-martin) at the Centre for Genomic Regulation (CRG).
 
 ## License
 SVAN is distributed under GPL-3.0 License.
