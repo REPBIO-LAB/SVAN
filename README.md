@@ -4,7 +4,7 @@ SVAN is a computational method for the annotation and classification of sequence
  
 SVAN has been used for the SV characterization of 1,019 samples sequenced with long-reads from the 1000 Genomes Project:
 
-Schloissnig et al., “Long-read sequencing and structural variant characterization in 1,019 samples from the 1000 Genomes Project”, bioRxiv, April 20, 2024, https://doi.org/10.1101/2024.04.18.590093
+Schloissnig et al., “Structural variation in 1,019 diverse humans based on long-read sequencing”, Nature, July 23, 2025, https://doi.org/10.1038/s41586-025-09290-7
 
 ## Download 
 Two different ways:
