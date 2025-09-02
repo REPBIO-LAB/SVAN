@@ -1224,7 +1224,7 @@ def filter_partnered_ipos(retro_annot):
             continue
 
         ## Collect coordinates for insertion interval 
-        tmp = insId.split('_')[1]
+        tmp = insId.rsplit('_', 1)[1]
         iChr, iPos = tmp.split(':')
         iBeg = int(iPos) - 1000
         iEnd = int(iPos) + 1000
@@ -1273,7 +1273,7 @@ def reclassify_5prime_partnered_ipos(retro_annot):
             continue
 
         ## Collect coordinates for insertion interval 
-        tmp = insId.split('_')[1]
+        tmp = insId.rsplit('_', 1)[1]
         iChr, iPos = tmp.split(':')
         iBeg = int(iPos) - 1000
         iEnd = int(iPos) + 1000
@@ -1944,7 +1944,7 @@ def templated_ins(retro_annot, chain):
     offset = 50000
     firstHit = chain.alignments[0]
     insIdRef, coord = firstHit.qName.split(':')
-    iRef = insIdRef.split('_')[1]
+    iRef = insIdRef.rsplit('_', 1)[1]
     iBeg = int(coord) - offset
     iEnd = int(coord) + offset
     
