@@ -3306,16 +3306,12 @@ info2add = {'ITYPE_N': ['.', 'String', 'Type of insertion: solo, partnered, orph
             'TSD_SEQ': ['.', 'String', 'Target site duplication sequence'], \
             
             ## PolyA specific fields
-            'POLYA_LEN': ['1', 'Integer', 'Poly(A) length'], \
+            'POLYA_LEN': ['.', 'String', 'Poly(A) length'], \
             'POLYA_SEQ': ['.', 'String', 'Poly(A) sequence'], \
 
             ## PSD specific fields
             'SRC_GENE': ['.', 'String', 'Source Gene Name'], \
             'NB_EXONS': ['1', 'Integer', 'Number of exons retrotransposed, processed pseudogene'], \
-
-            ## Source elements specific fields
-            'SOURCE_COORD': ['.', 'String', 'Source element genomic coordinates chr:beg-end'], \
-            'SOURCE_CYTOID': ['.', 'String', 'Source element cytoband identifier'], \
             
             ## Orphan transductions specific fields
             'ORPHAN_TD_LEN': ['1', 'Integer', 'Orphan transduction length'], \
@@ -3325,7 +3321,7 @@ info2add = {'ITYPE_N': ['.', 'String', 'Type of insertion: solo, partnered, orph
             
             ## 5' transductions
             '5PRIME_NB_TD': ['1', 'Integer', 'Number of 5-prime transductions'], \
-            '5PRIME_TD_LEN': ['1', 'Integer', 'Lengths for 5-prime transductions'], \
+            '5PRIME_TD_LEN': ['.', 'String', 'Lengths for 5-prime transductions'], \
             '5PRIME_TD_COORD': ['.', 'String', 'Genomic coordinates for 5-prime transductions'], \
             '5PRIME_TD_MAPQ': ['.', 'String', 'MAPQ for 5-prime transduction hits'], \
             '5PRIME_TD_SEQ': ['.', 'String', 'Sequences for 5-prime transductions'], \
@@ -3333,7 +3329,7 @@ info2add = {'ITYPE_N': ['.', 'String', 'Type of insertion: solo, partnered, orph
 
             ## 3' transductions
             '3PRIME_NB_TD': ['1', 'Integer', 'Number of 3-prime transductions'], \
-            '3PRIME_TD_LEN': ['1', 'Integer', 'Lengths for 3-prime transductions'], \
+            '3PRIME_TD_LEN': ['.', 'String', 'Lengths for 3-prime transductions'], \
             '3PRIME_TD_COORD': ['.', 'String', 'Genomic coordinates for 3-prime transductions'], \
             '3PRIME_TD_MAPQ': ['.', 'String', 'MAPQ for 3-prime transduction hits'], \
             '3PRIME_TD_SEQ': ['.', 'String', 'Sequences for 3-prime transductions'], \
@@ -3379,7 +3375,7 @@ info2add = {'ITYPE_N': ['.', 'String', 'Type of insertion: solo, partnered, orph
             }
 
 info2add_order1 = []
-info2add_order2 = ['ITYPE_N', 'INS_LEN', 'PERC_RESOLVED', 'MT_COORD', 'NB_MOTIFS', 'MOTIFS', 'DUP_COORD', 'STRAND', 'FAM_N', 'REPEAT_BKP', 'NOT_CANONICAL', 'CONFORMATION', 'CONFORMATION_EXT', 'RT_LEN', 'TSD_LEN', 'TSD_SEQ', 'HEXAMER_LEN', 'HEXAMER_SEQ', 'VNTR_LEN', 'VNTR_COORD', 'POLYA_LEN', 'POLYA_SEQ', 'SRC_GENE', 'NB_EXONS', 'SOURCE_COORD', 'SOURCE_CYTOID', 'ORPHAN_TD_LEN', 'ORPHAN_TD_COORD', 'ORPHAN_TD_MAPQ', 'ORPHAN_TD_SEQ', '5PRIME_NB_TD', '5PRIME_TD_LEN', '5PRIME_TD_COORD', '5PRIME_TD_MAPQ', '5PRIME_TD_SEQ', '5PRIME_MOB_GENE', '3PRIME_NB_TD', '3PRIME_TD_LEN', '3PRIME_TD_COORD', '3PRIME_TD_MAPQ', '3PRIME_TD_SEQ', '3PRIME_MOB_GENE', '5PRIME_TEMP_LEN', '5PRIME_TEMP_COORD', '5PRIME_TEMP_SEQ', 'INTERNAL_TEMP_LEN', 'INTERNAL_TEMP_COORD', 'INTERNAL_TEMP_SEQ', '3PRIME_TEMP_LEN', '3PRIME_TEMP_COORD', '3PRIME_TEMP_SEQ', 'NESTED_LEN', 'NESTED_FAM', 'NESTED_COORD', 'NESTED_MAPQ', 'NESTED_SEQ']
+info2add_order2 = ['ITYPE_N', 'INS_LEN', 'PERC_RESOLVED', 'MT_COORD', 'NB_MOTIFS', 'MOTIFS', 'DUP_COORD', 'STRAND', 'FAM_N', 'REPEAT_BKP', 'NOT_CANONICAL', 'CONFORMATION', 'CONFORMATION_EXT', 'RT_LEN', 'TSD_LEN', 'TSD_SEQ', 'HEXAMER_LEN', 'HEXAMER_SEQ', 'VNTR_LEN', 'VNTR_COORD', 'POLYA_LEN', 'POLYA_SEQ', 'SRC_GENE', 'NB_EXONS', 'ORPHAN_TD_LEN', 'ORPHAN_TD_COORD', 'ORPHAN_TD_MAPQ', 'ORPHAN_TD_SEQ', '5PRIME_NB_TD', '5PRIME_TD_LEN', '5PRIME_TD_COORD', '5PRIME_TD_MAPQ', '5PRIME_TD_SEQ', '5PRIME_MOB_GENE', '3PRIME_NB_TD', '3PRIME_TD_LEN', '3PRIME_TD_COORD', '3PRIME_TD_MAPQ', '3PRIME_TD_SEQ', '3PRIME_MOB_GENE', '5PRIME_TEMP_LEN', '5PRIME_TEMP_COORD', '5PRIME_TEMP_SEQ', 'INTERNAL_TEMP_LEN', 'INTERNAL_TEMP_COORD', 'INTERNAL_TEMP_SEQ', '3PRIME_TEMP_LEN', '3PRIME_TEMP_COORD', '3PRIME_TEMP_SEQ', 'NESTED_LEN', 'NESTED_FAM', 'NESTED_COORD', 'NESTED_MAPQ', 'NESTED_SEQ']
 
 for i in out_VCF.info_order:
     if i not in info2add_order2:
