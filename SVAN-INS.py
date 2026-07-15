@@ -3068,6 +3068,13 @@ def annotate_trim_polyA(annot):
             annot[insId]['POLYA_SEQ'] = annot[insId]['INS_TRIMMED'][annot[insId]['POLY_MONOMER'].beg:annot[insId]['POLY_MONOMER'].end]
             annot[insId]['INS_TRIMMED'] = annot[insId]['INS_TRIMMED'][annot[insId]['POLY_MONOMER'].end:]
 
+def cleanup_tmp_directory(tmpDir):
+    '''
+    Remove temporary working directory and all intermediate files.
+    '''
+    if os.path.isdir(tmpDir):
+        unix.rm([tmpDir])
+
 ######################
 ## Get user's input ##
 ######################
@@ -3405,4 +3412,4 @@ out_VCF.write(out_VCF.info_order, out_VCF.format_order, fileName , outDir)
 
 
 ## Cleanup
-#unix.rm([tmpDir])
+cleanup_tmp_directory(tmpDir)

@@ -2475,6 +2475,13 @@ def filter_VCF_len(VCF, maxLen):
     
     return filtered_VCF
 
+def cleanup_tmp_directory(tmpDir):
+    '''
+    Remove temporary working directory and all intermediate files.
+    '''
+    if os.path.isdir(tmpDir):
+        unix.rm([tmpDir])
+
 ######################
 ## Get user's input ##
 ######################
@@ -2732,4 +2739,4 @@ else:
 out_VCF.write(out_VCF.info_order, out_VCF.format_order, fileName , outDir)
 
 ## Cleanup
-#unix.rm([tmpDir])
+cleanup_tmp_directory(tmpDir)
