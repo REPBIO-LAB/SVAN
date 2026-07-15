@@ -56,5 +56,5 @@ def rm(paths):
 
             except OSError:  
                 step = 'ERROR'
-                msg = "Deletion of the file %s failed" % filePath
+                msg = "Deletion of the file %s failed" % path
                 log.step(step, msg)
