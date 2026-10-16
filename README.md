@@ -60,7 +60,8 @@ SVAN takes as input 6 mandatory arguments:
 ### Input files
 * Bed files for VNTR, EXONS and REPEAT annotations can be downloaded from Zenodo for hg38 (https://zenodo.org/records/15229020/files/hg38.tar.gz) and chm13 (https://zenodo.org/records/15229020/files/chm13.tar.gz).
 * Fasta containing consensus sequences for retroelements can be downloaded from Zenodo.
-* TRF output can be generated as described bellow.
+* TRF output can be generated as described below.
+* BWA Index needs to be generated for the reference and consensus fasta file before running SVAN.
 
 #### Generation of TRF annotations for INS
 1. Produce fasta with inserted sequences:

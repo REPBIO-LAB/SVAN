@@ -284,7 +284,7 @@ def align2flankingRegion(variant, refIndex, offset, outDir):
     PAF_path = outDir + '/insert2flankingRegion.paf'
 
     if not os.path.isfile(PAF_path):
-        SAM_path = alignment.alignment_bwa(insert_path, flank_path, 'insert2flankingRegion', 2, outDir)     
+        SAM_path = alignment.alignment_bwa(insert_path, flank_path, 'insert2flankingRegion', threads, outDir)     
         PAF_path = alignment.sam2paf(SAM_path, 'insert2flankingRegion', outDir)
 
     ## Read PAF
@@ -840,7 +840,8 @@ def annotate_tsd(VCF, reference, retro_annot):
 
         ## Check for TSD upstream insertion position
         ## -------[TARGET]INS[TSD]-------
-        targetCoord = variant.chrom + ':' + str(variant.pos - 40) + '-' + str(variant.pos)
+        beg = max(1, variant.pos - 40)
+        targetCoord = variant.chrom + ':' + str(beg) + '-' + str(variant.pos)
         targetSeq = reference.fetch(region=targetCoord)
         tsdSeq_up, tsdLen_up, trimmed = search4tsd(targetSeq[::-1], retro_annot[insId]['INS_TRIMMED'][::-1])
         retro_annot[insId]['INS_TRIMMED'] = trimmed[::-1]
@@ -911,7 +912,8 @@ def annotate_endomotif(VCF, reference, retro_annot):
 
         ## Check for TSD upstream insertion position
         ## -------[TARGET]INS[TSD]-------
-        targetCoord = variant.chrom + ':' + str(variant.pos - 40) + '-' + str(variant.pos)
+        beg = max(1, variant.pos - 40)
+        targetCoord = variant.chrom + ':' + str(beg) + '-' + str(variant.pos)
         targetSeq = reference.fetch(region=targetCoord)
         
         #tsdSeq_up, tsdLen_up, trimmed = search4tsd(targetSeq[::-1], retro_annot[insId]['INS_TRIMMED'][::-1])
@@ -1100,7 +1102,7 @@ def align_3prime_td(retro_annot, exonsBinDb, reference, outDir):
 
     ## Align transduced sequences into the reference
     #PAF_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/1KGP_callset/annot_INS/tmp/td3prime2ref.paf'
-    SAM_path = alignment.alignment_bwa(FASTA_path, reference, 'td3prime2ref', 2, outDir)     
+    SAM_path = alignment.alignment_bwa(FASTA_path, reference, 'td3prime2ref', threads, outDir)     
     PAF_path = alignment.sam2paf(SAM_path, 'td3prime2ref', outDir)
         
     ## Read alignments and create chain
@@ -1691,7 +1693,7 @@ def transductions_5prime_refinement(retro_annot, reference, exonsBinDb, minMAPQ,
 
     ## 3. Align sequences with bwa mem
     #PAF_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/1KGP_callset/annot_INS/tmp/5prime_td_candidates.paf'
-    SAM_path = alignment.alignment_bwa(FASTA_path, reference, '5prime_td_candidates', 2, outDir)
+    SAM_path = alignment.alignment_bwa(FASTA_path, reference, '5prime_td_candidates', threads, outDir)
     PAF_path = alignment.sam2paf(SAM_path, '5prime_td_candidates', outDir)
         
     ## 4. Read alignments file
@@ -2443,7 +2445,7 @@ def alignTrimmedIns2ref(retro_annot, reference, minMAPQ, minHitLen, fileName, ou
     ## 3. Align short inserts with Minimap2   
     preset = 'sr'
     #PAF_short_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/1KGP_callset/annot_INS/tmp/trimmed2ref_short.paf'
-    PAF_short_path = alignment_minimap2(FASTA_short_path, reference, preset, fileName + '_short', 2, outDir)
+    PAF_short_path = alignment_minimap2(FASTA_short_path, reference, preset, fileName + '_short', threads, outDir)
 
     PAF_short_ref = formats.PAF()
     PAF_short_ref.read(PAF_short_path)
@@ -2451,7 +2453,7 @@ def alignTrimmedIns2ref(retro_annot, reference, minMAPQ, minHitLen, fileName, ou
     ## 4. Align long inserts with Minimap2   
     preset = 'map-ont'
     #PAF_long_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/1KGP_callset/annot_INS/tmp/trimmed2ref_long.paf'
-    PAF_long_path = alignment_minimap2(FASTA_long_path, reference, preset, fileName + '_long', 2, outDir)
+    PAF_long_path = alignment_minimap2(FASTA_long_path, reference, preset, fileName + '_long', threads, outDir)
 
     PAF_long_ref = formats.PAF()
     PAF_long_ref.read(PAF_long_path)
@@ -2485,7 +2487,7 @@ def alignTrimmedIns2repeats(retro_annot, reference, minMAPQ, minHitLen, fileName
 
     ## 2. Align trimmed inserts with BWA-mem   
     #PAF_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/1KGP_callset/annot_INS/tmp/trimmed2repeats.paf'
-    SAM_path = alignment.alignment_bwa(FASTA_path, reference, fileName, 2, outDir)
+    SAM_path = alignment.alignment_bwa(FASTA_path, reference, fileName, threads, outDir)
     PAF_path = alignment.sam2paf(SAM_path, fileName, outDir)
 
     PAF_repeats = formats.PAF()
@@ -2516,7 +2518,7 @@ def alignTrimmedIns2repeats2(retro_annot, reference, minMAPQ, minHitLen, fileNam
 
     ## 2. Align trimmed inserts with BWA-mem  
     #PAF_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/annot_INS/tmp/trimmed2repeats_lenient.paf' 
-    SAM_path = alignment.alignment_bwa(FASTA_path, reference, fileName, 2, outDir)
+    SAM_path = alignment.alignment_bwa(FASTA_path, reference, fileName, threads, outDir)
     PAF_path = alignment.sam2paf(SAM_path, fileName, outDir)
 
     PAF_repeats = formats.PAF()
@@ -2546,7 +2548,7 @@ def nested_annot(retro_annot, reference, minMAPQ, minHitLen, fileName, outDir):
 
     ## Align transduced sequences into the reference
     #PAF_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/annot_INS/tmp/td3prime2consensus.paf'
-    SAM_path = alignment.alignment_bwa(FASTA_path, reference, 'td3prime2consensus', 2, outDir)     
+    SAM_path = alignment.alignment_bwa(FASTA_path, reference, 'td3prime2consensus', threads, outDir)     
     PAF_path = alignment.sam2paf(SAM_path, 'td3prime2consensus', outDir)
 
     ## Read alignments and create chain
@@ -2736,7 +2738,7 @@ def align_ins2ref(VCF, reference, outDir):
     ## Align short inserts with Minimap2   
     #PAF_short_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/1KGP_callset/annot_INS/tmp/inserts2ref_short.paf'
     preset = 'sr'
-    PAF_short_path = alignment_minimap2(FASTA_short_path, reference, preset, 'inserts2ref_short', 2, outDir)
+    PAF_short_path = alignment_minimap2(FASTA_short_path, reference, preset, 'inserts2ref_short', threads, outDir)
 
     PAF_short_ref = formats.PAF()
     PAF_short_ref.read(PAF_short_path)
@@ -2744,7 +2746,7 @@ def align_ins2ref(VCF, reference, outDir):
     ## Align long inserts with Minimap2   
     #PAF_long_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/1KGP_callset/annot_INS/tmp/inserts2ref_long.paf'
     preset = 'map-ont'
-    PAF_long_path = alignment_minimap2(FASTA_long_path, reference, preset, 'inserts2ref_long', 2, outDir)
+    PAF_long_path = alignment_minimap2(FASTA_long_path, reference, preset, 'inserts2ref_long', threads, outDir)
 
     PAF_long_ref = formats.PAF()
     PAF_long_ref.read(PAF_long_path)
@@ -2810,7 +2812,7 @@ def align_ins2repeats(VCF, repeatsDb, outDir):
 
     ## Align inserted sequence against reference sequence
     #PAF_path = '/Users/brodriguez/Research/Projects/1KGP_LR/SV_annot/resubmission/annot_INS/tmp/inserts2repeats.paf'
-    SAM_path = alignment.alignment_bwa(FASTA_path, repeatsDb, 'inserts2repeats', 2, outDir)     
+    SAM_path = alignment.alignment_bwa(FASTA_path, repeatsDb, 'inserts2repeats', threads, outDir)     
     PAF_path = alignment.sam2paf(SAM_path, 'inserts2repeats', outDir)
     
     PAF_repeats = formats.PAF()
@@ -3066,6 +3068,13 @@ def annotate_trim_polyA(annot):
             annot[insId]['POLYA_SEQ'] = annot[insId]['INS_TRIMMED'][annot[insId]['POLY_MONOMER'].beg:annot[insId]['POLY_MONOMER'].end]
             annot[insId]['INS_TRIMMED'] = annot[insId]['INS_TRIMMED'][annot[insId]['POLY_MONOMER'].end:]
 
+def cleanup_tmp_directory(tmpDir):
+    '''
+    Remove temporary working directory and all intermediate files.
+    '''
+    if os.path.isdir(tmpDir):
+        unix.rm([tmpDir])
+
 ######################
 ## Get user's input ##
 ######################
@@ -3082,6 +3091,7 @@ parser.add_argument('reference', help='Path to FASTA file containing the referen
 parser.add_argument('fileName', help='Output file name')
 parser.add_argument('--replace-info', action="store_true", default=False, dest='replaceInfo', help='Replace info fields by RETRO-related ones. Default: False (== add RETRO to pre-existing fields)')
 parser.add_argument('-o', '--outDir', default=os.getcwd(), dest='outDir', help='output directory. Default: current working directory' )
+parser.add_argument('-t', '--threads', type=int, default=2, dest='threads', help='Number of CPU threads for alignment tools. Default: 2')
 
 ## 2. Parse user input ##
 args = parser.parse_args()
@@ -3095,6 +3105,7 @@ reference = args.reference
 fileName = args.fileName
 replaceInfo = args.replaceInfo
 outDir = args.outDir
+threads = args.threads
 
 ## 3. Display configuration to standard output ##
 scriptName = os.path.basename(sys.argv[0])
@@ -3401,4 +3412,4 @@ out_VCF.write(out_VCF.info_order, out_VCF.format_order, fileName , outDir)
 
 
 ## Cleanup
-#unix.rm([tmpDir])
+cleanup_tmp_directory(tmpDir)
